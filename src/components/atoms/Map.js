@@ -18,5 +18,5 @@ export default function Map () {
     Leaflet.heatLayer(points).addTo(map)
   }, [])
 
-  return <div id="map" style={{ height: '100vh' }}></div>
+  return <section id="map"></section>
 }
