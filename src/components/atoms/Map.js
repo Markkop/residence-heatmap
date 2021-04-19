@@ -13,7 +13,14 @@ export default class Map extends React.Component {
   }
 
   mapAddressesToPoints (addresses) {
-    return addresses.map(({ latitude, longitude }) => [latitude, longitude])
+    return addresses.reduce((points, { latitude, longitude, residents }) => {
+      const point = [latitude, longitude]
+      const samePoints = []
+      for (let resident = 1; resident <= residents; resident++) {
+        samePoints.push(point)
+      }
+      return [...points, ...samePoints]
+    }, [])
   }
 
   addHeatLayerPointsToMap (points, map) {
