@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ADDRESSES_ENDPOINT = 'http://localhost:3031/addresses'
+const ADDRESSES_ENDPOINT = '/api/addresses'
 
 /**
  * @typedef Address
