@@ -113,7 +113,7 @@ span {
     flex-direction: column;
   }
   #map {
-    height: 70vh;
+    height: 400px;
     width: 100%;
   }
   .form-container {
