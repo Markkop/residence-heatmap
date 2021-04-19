@@ -23,8 +23,9 @@ export default class Map extends React.Component {
   }
 
   addAttributionLayerToMap (map) {
+    const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution }).addTo(map)
+    Leaflet.tileLayer(url, { attribution }).addTo(map)
   }
 
   componentDidMount () {
