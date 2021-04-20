@@ -10,6 +10,7 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
   const [residents, setResidents] = useState('')
+  const [hasSentForm, setHasSentForm] = useState(false)
 
   const inputs = [
     {
@@ -81,6 +82,11 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
 
     await createAddresses(address)
     addAddress(address)
+
+    setHasSentForm(true)
+    setTimeout(() => {
+      setHasSentForm(false)
+    }, 2000)
   }
 
   return <div className="residence-panel">
@@ -93,7 +99,11 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
             key={input.name}
             {...input}
           />)}
-        <button type="submit" className="form-submit">Register</button>
+        <button
+          type="submit"
+          className={`form-submit ${hasSentForm ? 'sent' : ''}`}>
+          {hasSentForm ? '✅' : 'Register'}
+        </button>
       </form>
       <button onClick={addRandomAddress}>Add a random residence</button>
       <button onClick={resetAddresses}>Reset to initial state</button>

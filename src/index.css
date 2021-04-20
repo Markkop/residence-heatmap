@@ -85,10 +85,15 @@ button {
   width: 100%;
 }
 
-button:hover {
+button:hover:not(.sent) {
   background: #78788c;
   color: #fff
 }
+
+.sent {
+  background: #43a33f
+}
+
 
 .residence-panel {
   bottom: -15px;
