@@ -7,6 +7,14 @@
       "latitude": -27.59022,
       "longitude": -48.543542,
       "residents": 10
+    },
+    {
+      "zipCode": "11045-908",
+      "number": 200,
+      "latitude": -27.59021,
+      "longitude": -48.543541,
+      "residents": 11,
+      "id": 2
     }
   ]
 }

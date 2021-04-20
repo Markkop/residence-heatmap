@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ADDRESSES_ENDPOINT = 'http://localhost:3031/addresses'
+const ADDRESSES_ENDPOINT = '/api/addresses'
 
 /**
  * @typedef Address
@@ -36,6 +36,10 @@ export async function getAddresses () {
  * @returns {Promise<DataBaseAddress>}
  */
 export async function createAddresses (address) {
-  const { data } = await axios.post(ADDRESSES_ENDPOINT, address)
-  return data
+  try {
+    const { data } = await axios.post(ADDRESSES_ENDPOINT, address)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
 }

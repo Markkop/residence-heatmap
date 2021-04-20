@@ -8,8 +8,12 @@ import { getAddresses } from '../../services/addresses'
  * @param {React.Dispatch<React.SetStateAction<any[]>>} setAddresses
  */
 async function getAndSetAddresses (setAddresses) {
-  const addresses = await getAddresses()
-  setAddresses(addresses)
+  try {
+    const addresses = await getAddresses()
+    setAddresses(addresses)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function Home () {
