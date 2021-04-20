@@ -1,9 +1,9 @@
 import FormInput from '../atoms/FormInput'
-import { createAddresses, resetAddresses } from '../../services/addresses'
+import { createAddresses } from '../../services/addresses'
 import { useState } from 'react'
 import { zipCodeFormatter } from '../../utils/formater'
 
-function Form ({ addAddress, addRandomAddress }) {
+function Form ({ addAddress, addRandomAddress, resetAddresses }) {
   const [isFormValid, setIsFormValid] = useState(false)
   const [zipCode, setZipCode] = useState('')
   const [number, setNumber] = useState('')

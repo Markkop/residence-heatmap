@@ -56,7 +56,7 @@ export async function createAddresses (address) {
  * Create Addresses from endpoint
  * @returns {Promise<DataBaseAddress>}
  */
-export async function resetAddresses () {
+export async function resetDbAddresses () {
   try {
     const { data } = await axios.post(RESET_ENDPOINT, {
       addresses: [{

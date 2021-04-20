@@ -1,7 +1,7 @@
 import Map from '../atoms/Map'
 import Form from '../molecules/Form'
 import { useEffect, useState } from 'react'
-import { getAddresses } from '../../services/addresses'
+import { getAddresses, resetDbAddresses } from '../../services/addresses'
 import { generateRandomAddress } from '../../utils/random'
 
 /**
@@ -39,9 +39,22 @@ function Home () {
     const randomAddress = generateRandomAddress(baseAddress)
     addAddress(randomAddress)
   }
+
+  /**
+   * Reset addresses to their initial state
+   */
+  async function resetAddresses () {
+    await resetDbAddresses()
+    await getAndSetAddresses(setAddresses)
+  }
+
   return <main>
     <Map addresses={addresses}/>
-    <Form addAddress={addAddress} addRandomAddress={addRandomAddress}/>
+    <Form
+      addAddress={addAddress}
+      addRandomAddress={addRandomAddress}
+      resetAddresses={resetAddresses}
+    />
   </main>
 }
 
