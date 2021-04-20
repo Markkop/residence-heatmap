@@ -28,8 +28,12 @@ const ADDRESSES_ENDPOINT = isDev ? 'http://localhost:3001/api/addresses' : '/api
  * @returns {Promise<DataBaseAddress[]>}
  */
 export async function getAddresses () {
-  const { data } = await axios(ADDRESSES_ENDPOINT)
-  return data
+  try {
+    const { data } = await axios(ADDRESSES_ENDPOINT)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /**
