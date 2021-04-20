@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 function FormInput (props) {
   const {
-    setIsFormValid,
+    setValidInputs,
     label,
     name,
     type,
@@ -13,6 +13,7 @@ function FormInput (props) {
     formatter
   } = props
   const [isInputValid, setIsInputValid] = useState(true)
+  const [invalidMessage, setInvalidMessage] = useState('')
 
   /**
    * Format and validates the inputted value
@@ -30,29 +31,36 @@ function FormInput (props) {
     }
 
     const newValue = formattedValue || inputValue
-    const hasPassedValidation = validator(newValue)
-    if (hasPassedValidation) {
-      setIsFormValid(true)
+    const validationResult = validator ? validator(newValue) : true
+    if (validationResult === true) {
+      setValidInputs(state => state.add(name))
       setIsInputValid(true)
+      setInvalidMessage('')
       return
     }
 
-    setIsFormValid(false)
+    setValidInputs(state => { state.delete(name); return state })
     setIsInputValid(false)
+    setInvalidMessage(validationResult)
   }
 
-  return <label className={`form-label ${name}`}>
-    <p>{label}:</p>
-    <input
-      type={type}
-      name={name}
-      onChange={onInputChange}
-      placeholder={placeholder}
-      className={isInputValid ? '' : 'invalid'}
-      value={state}
-      required
-    />
-  </label>
+  const hasFloatStep = type === 'number' && /latitude|longitude/.test(name)
+  return <div className="form-field">
+    <label className={`form-label ${name}`}>
+      <p>{label}:</p>
+      <input
+        type={type}
+        name={name}
+        onChange={onInputChange}
+        placeholder={placeholder}
+        className={isInputValid ? '' : 'invalid'}
+        value={state}
+        step={hasFloatStep && 0.00001}
+        required
+      />
+    </label>
+    {!isInputValid && <p className="field-error" >{invalidMessage}</p>}
+  </div>
 }
 
 export default FormInput

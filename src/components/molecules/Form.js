@@ -1,10 +1,16 @@
-import FormInput from '../atoms/FormInput'
-import { createAddresses } from '../../services/addresses'
 import { useState } from 'react'
+import { createAddresses } from '../../services/addresses'
 import { zipCodeFormatter } from '../../utils/formater'
+import FormInput from '../atoms/FormInput'
+import {
+  zipCodeValidator,
+  latitudeValidator,
+  longitudeValidator,
+  residentsValidator
+} from '../../utils/validators'
 
 function Form ({ addAddress, addRandomAddress, resetAddresses }) {
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [validInputs, setValidInputs] = useState(new Set())
   const [zipCode, setZipCode] = useState('')
   const [number, setNumber] = useState('')
   const [latitude, setLatitude] = useState('')
@@ -20,8 +26,8 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       placeholder: '88015-420',
       state: zipCode,
       stateSetter: setZipCode,
-      validator: value => /^\d{5}-\d{3}$/.test(value),
-      formatter: zipCodeFormatter
+      formatter: zipCodeFormatter,
+      validator: zipCodeValidator
     },
     {
       label: 'Number',
@@ -29,8 +35,7 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       type: 'number',
       placeholder: 238,
       state: number,
-      stateSetter: setNumber,
-      validator: () => true
+      stateSetter: setNumber
     },
     {
       label: 'Latitude',
@@ -39,7 +44,7 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       placeholder: -27.59022,
       state: latitude,
       stateSetter: setLatitude,
-      validator: number => isFinite(number) && Math.abs(number) <= 90
+      validator: latitudeValidator
     },
     {
       label: 'Longitude',
@@ -48,7 +53,7 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       placeholder: -48.543542,
       state: longitude,
       stateSetter: setLongitude,
-      validator: number => isFinite(number) && Math.abs(number) <= 180
+      validator: longitudeValidator
     },
     {
       label: 'Residents',
@@ -57,9 +62,11 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       placeholder: 10,
       state: residents,
       stateSetter: setResidents,
-      validator: number => number > 0 && Number.isInteger(number)
+      validator: residentsValidator
     }
   ]
+
+  const isFormValid = validInputs.size === inputs.length
 
   /**
    * Handles the form submission to create a new address
@@ -76,7 +83,6 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
     }
 
     if (!isFormValid) {
-      alert('Invalido')
       return
     }
 
@@ -95,13 +101,15 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
         <h2>Register a residence</h2>
         {inputs.map(input =>
           <FormInput
-            setIsFormValid={setIsFormValid}
+            setValidInputs={setValidInputs}
             key={input.name}
             {...input}
           />)}
         <button
           type="submit"
-          className={`form-submit ${hasSentForm ? 'sent' : ''}`}>
+          className={`form-submit ${hasSentForm ? 'sent' : ''}`}
+          disabled={!isFormValid}
+          >
           {hasSentForm ? '✅' : 'Register'}
         </button>
       </form>

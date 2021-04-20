@@ -22,7 +22,6 @@ main {
   flex-direction: column;
   position: relative;
   width: 340px;
-  height: 440px;
   background: #e6e6e6;
   border-radius: 8px;
   box-shadow: 0 0 40px -10px #000;
@@ -85,7 +84,12 @@ button {
   width: 100%;
 }
 
-button:hover:not(.sent) {
+.form-submit:disabled {
+  border-color: #96969b;
+  color: #96969b
+}
+
+button:hover:not(.sent):not(:disabled) {
   background: #78788c;
   color: #fff
 }
@@ -94,14 +98,11 @@ button:hover:not(.sent) {
   background: #43a33f
 }
 
-
 .residence-panel {
   bottom: -15px;
   right: -20px;
   background: #50505a;
   width: 30%;
-  padding: 16px 4px 16px 0;
-  border-radius: 6px;
   font-size: 13px;
   box-shadow: 10px 10px 40px -14px #000
 }
@@ -110,12 +111,24 @@ span {
   margin: 0 5px 0 15px
 }
 
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
 .form-label {
   display: flex;
 }
 
 .form-label>p {
   width: 30%;
+}
+
+.field-error {
+  font-size: 12px;
+  margin: 0;
+  margin-top: 5px;
+  color: darkred;
 }
 
 @media (max-width: 768px) {
