@@ -2,6 +2,7 @@ import Map from '../atoms/Map'
 import Form from '../molecules/Form'
 import { useEffect, useState } from 'react'
 import { getAddresses } from '../../services/addresses'
+import { generateRandomAddress } from '../../utils/random'
 
 /**
  * Get addresses from API and set them to their state
@@ -30,9 +31,17 @@ function Home () {
     setAddresses([...addresses, address])
   }
 
+  /**
+   * Add a random address near the last point (or a fixed one)
+   */
+  function addRandomAddress () {
+    const baseAddress = addresses[addresses.length - 1]
+    const randomAddress = generateRandomAddress(baseAddress)
+    addAddress(randomAddress)
+  }
   return <main>
     <Map addresses={addresses}/>
-    <Form addAddress={addAddress}/>
+    <Form addAddress={addAddress} addRandomAddress={addRandomAddress}/>
   </main>
 }
 

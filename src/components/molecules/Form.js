@@ -1,34 +1,15 @@
 import FormInput from '../atoms/FormInput'
 import { createAddresses } from '../../services/addresses'
 import { useState } from 'react'
+import { zipCodeFormatter } from '../../utils/formater'
 
-function Form ({ addAddress }) {
+function Form ({ addAddress, addRandomAddress }) {
   const [isFormValid, setIsFormValid] = useState(false)
   const [zipCode, setZipCode] = useState('')
   const [number, setNumber] = useState('')
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
   const [residents, setResidents] = useState('')
-
-  /**
-   * Formats the ZIP Code inputed to its expected format
-   * Ex: 88015-420
-   * @param {string} value
-   * @param {string} previousValue
-   * @returns {string}
-   */
-  function ZipCodeFormatter (value, previousValue) {
-    if (!value) return value
-
-    const currentValue = value.replace(/[^\d]/g, '')
-    const currentValueLength = currentValue.length
-
-    if (!previousValue || value.length > previousValue.length) {
-      if (currentValueLength < 6) return currentValue
-
-      return `${currentValue.slice(0, 5)}-${currentValue.slice(5, 8)}`
-    }
-  }
 
   const inputs = [
     {
@@ -39,7 +20,7 @@ function Form ({ addAddress }) {
       state: zipCode,
       stateSetter: setZipCode,
       validator: value => /^\d{5}-\d{3}$/.test(value),
-      formatter: ZipCodeFormatter
+      formatter: zipCodeFormatter
     },
     {
       label: 'Number',
@@ -102,17 +83,20 @@ function Form ({ addAddress }) {
     addAddress(address)
   }
 
-  return <div className="form-container">
-    <form className="form" onSubmit={onFormSubmit}>
-      <h2>Register a residence</h2>
-      {inputs.map(input =>
-        <FormInput
-          setIsFormValid={setIsFormValid}
-          key={input.name}
-          {...input}
-        />)}
-      <input type="submit" value="Send" className="form-submit"/>
-    </form>
+  return <div className="residence-panel">
+    <div className="form-container">
+      <form className="form" onSubmit={onFormSubmit}>
+        <h2>Register a residence</h2>
+        {inputs.map(input =>
+          <FormInput
+            setIsFormValid={setIsFormValid}
+            key={input.name}
+            {...input}
+          />)}
+        <button type="submit" className="form-submit">Send</button>
+      </form>
+      <button onClick={addRandomAddress}>Add a random residence</button>
+    </div>
   </div>
 }
 

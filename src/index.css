@@ -14,11 +14,13 @@ main {
 }
 
 #map {
-  height: 100vh;
   width: 70%;
 }
 
-.form {
+.form-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   width: 340px;
   height: 440px;
   background: #e6e6e6;
@@ -29,7 +31,6 @@ main {
   max-width: calc(100vw - 40px);
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  position: relative
 }
 
 h2 {
@@ -80,12 +81,16 @@ button {
   transition: all .3s
 }
 
+.form-submit {
+  width: 100%;
+}
+
 button:hover {
   background: #78788c;
   color: #fff
 }
 
-.form-container {
+.residence-panel {
   bottom: -15px;
   right: -20px;
   background: #50505a;
@@ -116,7 +121,7 @@ span {
     height: 400px;
     width: 100%;
   }
-  .form-container {
+  .residence-panel {
     width: 100%;
   }
 }
