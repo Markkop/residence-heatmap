@@ -1,5 +1,7 @@
 import axios from 'axios'
-const ADDRESSES_ENDPOINT = '/api/addresses'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ADDRESSES_ENDPOINT = isDev ? 'http://localhost:3001/api/addresses' : '/api/addresses'
 
 /**
  * @typedef Address
