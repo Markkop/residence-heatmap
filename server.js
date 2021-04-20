@@ -1,9 +1,11 @@
 const jsonServer = require('json-server')
-const app = jsonServer.create()
-const path = require('path')
 const express = require('express')
+const path = require('path')
+
+const app = jsonServer.create()
 const middlewares = jsonServer.defaults()
 const router = jsonServer.router('data/db.json')
+
 const port = process.env.PORT || 3001
 
 app.use('/api', middlewares, router)
