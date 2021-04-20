@@ -1,0 +1,12 @@
+{
+  "addresses": [
+    {
+      "id": 1,
+      "number": 238,
+      "zipCode": "88015-420",
+      "latitude": -27.59022,
+      "longitude": -48.543542,
+      "residents": 10
+    }
+  ]
+}

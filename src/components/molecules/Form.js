@@ -1,5 +1,5 @@
 import FormInput from '../atoms/FormInput'
-import { createAddresses } from '../../services/addresses'
+import { createAddresses, resetAddresses } from '../../services/addresses'
 import { useState } from 'react'
 import { zipCodeFormatter } from '../../utils/formater'
 
@@ -93,9 +93,10 @@ function Form ({ addAddress, addRandomAddress }) {
             key={input.name}
             {...input}
           />)}
-        <button type="submit" className="form-submit">Send</button>
+        <button type="submit" className="form-submit">Register</button>
       </form>
       <button onClick={addRandomAddress}>Add a random residence</button>
+      <button onClick={resetAddresses}>Reset to initial state</button>
     </div>
   </div>
 }
