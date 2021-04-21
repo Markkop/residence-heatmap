@@ -62,5 +62,5 @@ export function longitudeValidator (number) {
  */
 export function residentsValidator (number) {
   const isValid = number > 0 && Number.isInteger(number)
-  return isValid || 'Residents is not a valid integer number'
+  return isValid || 'Residents is not a valid positive integer number'
 }
