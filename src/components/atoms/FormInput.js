@@ -36,13 +36,13 @@ function FormInput (props) {
     const validationResult = validator ? await validator(newValue) : true
     setIsLoading(false)
     if (validationResult === true) {
-      setValidInputs(state => state.add(name))
+      setValidInputs(state => [...new Set([...state, name])])
       setIsInputValid(true)
       setInvalidMessage('')
       return
     }
 
-    setValidInputs(state => { state.delete(name); return state })
+    setValidInputs(state => state.filter(stateName => stateName !== name))
     setIsInputValid(false)
     setInvalidMessage(validationResult)
   }

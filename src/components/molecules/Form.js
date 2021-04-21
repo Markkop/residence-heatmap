@@ -10,7 +10,7 @@ import {
 } from '../../utils/validators'
 
 function Form ({ addAddress, addRandomAddress, resetAddresses }) {
-  const [validInputs, setValidInputs] = useState(new Set())
+  const [validInputs, setValidInputs] = useState([])
   const [zipCode, setZipCode] = useState('')
   const [number, setNumber] = useState('')
   const [latitude, setLatitude] = useState('')
@@ -66,7 +66,7 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
     }
   ]
 
-  const isFormValid = validInputs.size === inputs.length
+  const isFormValid = validInputs.length === inputs.length
 
   /**
    * Handles the form submission to create a new address
