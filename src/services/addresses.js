@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 const isDev = process.env.NODE_ENV === 'development'
-const BASE_URL = isDev ? 'http://localhost:3001/api' : '/api'
+const BASE_DOMAIN = isDev ? 'http://localhost:3001' : ''
+const BASE_URL = `${BASE_DOMAIN}/api`
 const ADDRESSES_ENDPOINT = `${BASE_URL}/addresses`
-const RESET_ENDPOINT = '/reset'
+const RESET_ENDPOINT = `${BASE_DOMAIN}/reset`
 
 /**
  * @typedef Address
