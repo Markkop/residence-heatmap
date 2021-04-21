@@ -86,13 +86,14 @@ function Form ({ addAddress, addRandomAddress, resetAddresses }) {
       return
     }
 
-    await createAddresses(address)
-    addAddress(address)
-
-    setHasSentForm(true)
-    setTimeout(() => {
-      setHasSentForm(false)
-    }, 2000)
+    const success = await createAddresses(address)
+    if (success) {
+      addAddress(address)
+      setHasSentForm(true)
+      setTimeout(() => {
+        setHasSentForm(false)
+      }, 2000)
+    }
   }
 
   return <div className="residence-panel">
