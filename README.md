@@ -12,13 +12,13 @@ This project is a coding challenge that displays a heat-map visualization for re
 
 ## Demo
 
-Soon
+https://residences-heatmap.herokuapp.com/
 
 ## How to Run
 
 - Clone this repository
-- Run `yarn` to install dependencies
-- Run `yarn start` to have the application up on http://localhost:8080
+- Run `npm install` to install dependencies
+- Run `npm run dev` to have the application up on http://localhost:8080
 
 ## Technologies Used
 
