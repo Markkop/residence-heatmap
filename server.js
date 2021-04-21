@@ -12,18 +12,9 @@ const router = jsonServer.router('data/db.json')
 
 const port = process.env.PORT || 3001
 
-/**
- * Workaround to be able to use json-server-reset lib with
- * a custom route
- * @returns {any}
- */
-function resetOnApiRoute () {
-  arguments[0].url = arguments[0].url.replace('/api', '')
-  return reset(...arguments)
-}
 app.use(setApp(app, router.db))
 app.use(bodyParser)
-app.use(resetOnApiRoute)
+app.use(reset)
 
 app.use('/api', middlewares, router)
 app.use(express.static(path.join(__dirname, 'build')))
