@@ -8,12 +8,12 @@ import axios from 'axios'
 export async function validateZipCodeExternally (zipCode) {
   try {
     const code = zipCode.replace('-', '')
-    const { data } = await axios(`http://cep.la/${code}`, {
+    const { data } = await axios(`https://viacep.com.br/ws/${code}/json/`, {
       headers: {
         Accept: 'application/json'
       }
     })
-    if (!data.cep) {
+    if (data.erro) {
       return 'This ZIP Code was not found'
     }
 
