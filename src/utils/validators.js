@@ -1,11 +1,41 @@
+import axios from 'axios'
+
+/**
+ * Validates brazilian zip code using an external API
+ * @param {string} zipCode
+ * @returns Promise<true|string>
+ */
+export async function validateZipCodeExternally (zipCode) {
+  try {
+    const code = zipCode.replace('-', '')
+    const { data } = await axios(`http://cep.la/${code}`, {
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    if (!data.cep) {
+      return 'This ZIP Code was not found'
+    }
+
+    return true
+  } catch (error) {
+    console.log(error)
+    return 'Network Error'
+  }
+}
+
 /**
  * Validates ZipCode
  * @param {string} value
- * @returns {true|string}
+ * @returns {Promise<true|string>}
  */
-export function zipCodeValidator (value) {
-  const isValid = /^\d{5}-\d{3}$/.test(value)
-  return isValid || 'ZipCode is not within format 00000-000'
+export async function zipCodeValidator (value) {
+  const isValidFormat = /^\d{5}-\d{3}$/.test(value)
+  if (!isValidFormat) {
+    return 'ZipCode is not within format 00000-000'
+  }
+
+  return validateZipCodeExternally(value)
 }
 /**
  * Validates latitude

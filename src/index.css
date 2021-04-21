@@ -131,6 +131,13 @@ span {
   color: darkred;
 }
 
+.field-loading {
+  background-image: url(https://i.stack.imgur.com/27Rnd.gif); 
+  background-size: 10%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 @media (max-width: 768px) {
   main {
     flex-direction: column;
