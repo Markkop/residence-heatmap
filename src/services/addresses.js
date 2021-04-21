@@ -35,6 +35,7 @@ export async function getAddresses () {
     return data
   } catch (error) {
     console.log(error)
+    return []
   }
 }
 
