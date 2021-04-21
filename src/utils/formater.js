@@ -11,9 +11,6 @@ export function zipCodeFormatter (value, previousValue) {
   const currentValue = value.replace(/[^\d]/g, '')
   const currentValueLength = currentValue.length
 
-  if (!previousValue || value.length > previousValue.length) {
-    if (currentValueLength < 6) return currentValue
-
-    return `${currentValue.slice(0, 5)}-${currentValue.slice(5, 8)}`
-  }
+  if (currentValueLength < 6) return currentValue
+  return `${currentValue.slice(0, 5)}-${currentValue.slice(5, 8)}`
 }
