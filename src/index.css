@@ -136,6 +136,7 @@ span {
   background-size: 10%;
   background-repeat: no-repeat;
   background-position: right;
+  transition: none;
 }
 
 @media (max-width: 768px) {
